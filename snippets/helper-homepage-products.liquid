@@ -1,0 +1,107 @@
+<!-- Begin frontpage no products -->
+{% if shop.products_count == 0 %}
+  <div id="featuredHelper" class="gl-row">
+    <div class="gl-col gl-col_6">
+      <p>
+        <a class="admin-btn-primary" href="/admin/collections?tutorial=Frontpage">Add to collection</a>
+        <a class="secondary-action" href="http://docs.shopify.com/manual/your-store/collections?utm_source=default-theme&utm_medium=contextual&utm_campaign=default-theme-products-tooltips-experiment" target="shopify_info">Learn about collections ›</a>
+      </p>
+      <p>
+        <a class="admin-btn-primary" href="/admin/products/new">Add a product</a>
+        <a class="secondary-action" href="/products/example-product">View a sample product ›</a>
+      </p>
+    </div>
+    <div class="gl-col gl-col_10">
+      <i class="icon-products helper-icon"></i>
+      <h3>You haven't added any products yet</h3>
+      <p>It takes less than a minute to add a product to your store. Make sure you also add it to the <em>{{ collections[settings.frontpage_collection].title }}</em> collection to see it on the home page.</p>
+    </div>
+  </div>
+{% elsif collections[settings.frontpage_collection].products.size == 0 %}
+  <div id="featuredHelper" class="gl-row">
+    <div class="gl-col gl-col_6">
+      <p><a class="admin-btn-primary" href="/admin/collections?tutorial=Frontpage">Add to collection</a>
+        <a class="secondary-action" href="http://docs.shopify.com/manual/your-store/collections?utm_source=default-theme&utm_medium=contextual&utm_campaign=default-theme-products-tooltips-experiment" target="shopify_info">Learn about collections ›</a>
+      </p>
+    </div>
+    <div class="gl-col gl-col_10">
+      <i class="icon-collections helper-icon"></i>
+      <h3>Almost there...</h3>
+      <p>Now add a product to the <em>{{ collections[settings.frontpage_collection].title }}</em> collection to see it on the home page.</p>
+    </div>
+  </div>
+{% endif %}
+
+
+  <!-- begin Featured sample !-->
+  <h1>Featured Product</h1>
+  <div class="gl-row featured-product">
+    <div class="gl-col gl-col_7 featured-product-description">
+      <h2>Example Featured Product</h2>
+      <span class="price">
+        {{ '7999' | money }}
+      </span>
+      <div class="featured-product-description">
+        <p>Your store is looking a little empty! These placeholders will appear until you add your first product.</p>
+      </div>
+      <a class="btn">View Product</a>
+    </div>
+    <div class="gl-col gl-col_9 featured-product-image">
+      <img src="{{ 'product-1.png' | asset_url }}" alt="Example product" />
+    </div>
+  </div>
+  <!-- end Featured sample !-->
+
+
+  <!-- begin List sample !-->
+  <h1>Product Grid</h1>
+  <div class="gl-row">
+    <div class="product gl-col gl-col_4">
+      <div class="image">
+        <img src="{{ 'product-2.png' | asset_url }}" alt="Example product" />
+      </div>
+      <div class="details">
+        <h4 class="title">Example Product title </h4>
+        <span class="price">
+          {{ '8499' | money }}
+        </span>
+      </div>
+    </div>
+
+    <div class="product gl-col gl-col_4">
+      <div class="image">
+        <img src="{{ 'product-3.png' | asset_url }}" alt="Example product" />
+      </div>
+      <div class="details">
+        <h4 class="title">Example Product title </h4>
+        <span class="price">
+          {{ '5999' | money }}
+        </span>
+      </div>
+    </div>
+
+    <div class="product gl-col gl-col_4">
+      <div class="image">
+        <img src="{{ 'product-4.png' | asset_url }}" alt="Example product" />
+      </div>
+      <div class="details">
+        <h4 class="title">Example Product title </h4>
+        <span class="price">
+          {{ '2999' | money }}
+        </span>
+      </div>
+    </div>
+
+    <div class="product gl-col gl-col_4">
+      <div class="image">
+        <img src="{{ 'product-4.png' | asset_url }}" alt="Example product" />
+      </div>
+      <div class="details">
+        <h4 class="title">Example Product title </h4>
+        <span class="price">
+          {{ '2999' | money }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- end List sample !-->

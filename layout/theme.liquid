@@ -1,0 +1,253 @@
+{% unless customer %}
+    {% if template contains 'customers' %}
+        {% assign send_to_login = false %}
+    {% else %}
+        {% assign send_to_login = true %}
+    {% endif %}
+{% endunless %}
+
+{% if send_to_login %}
+<meta content="0; url=/account/login?checkout_url={{ shop.url }}" http-equiv="refresh" />
+{% else %}
+
+{% endif %}
+
+
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  {% if settings.display_favicon %}
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  {% endif %}
+  <meta charset="utf-8" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+  <title>
+    {% if template == 'index' %}{% if page_title contains 'Welcome' %}{{ shop.name }} &ndash; Welcome{% else %}{{ page_title }}{% endif %}{% elsif template == '404' %}Page Not Found{% elsif page_title contains shop.name %}{{ page_title }}{% else %}{{ page_title }} &ndash; {{ shop.name }}{% endif %}
+  </title>
+  {% if page_description %}
+    <meta name="description" content="{{ page_description }}" />
+  {% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="{{ canonical_url }}" />
+  {% include 'fb-open-graph-tags' %}
+  {% include 'twitter-card' %}
+
+  <!-- {{ 'styles.scss.css' | asset_url | stylesheet_tag }} !-->
+  {% if settings.header_font contains 'Google' %}
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family={{ settings.header_font | remove: 'Google+' }}:300,400,700">
+  {% endif %}
+  {% if settings.base_font contains 'Google' %}
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family={{ settings.base_font | remove: 'Google+' }}:300,400,700">
+  {% endif %}
+  {{ 'html5shiv.js' | asset_url | script_tag }}
+
+  {{ content_for_header }}
+
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
+  {{ 'jquery-migrate-1.2.0.min.js' | asset_url | script_tag }}
+
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+
+  {% if template contains 'customers' %}
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+
+  <link rel="icon" type="image/png" href="//cdn.shopify.com/s/files/1/0867/4198/files/logo-favicon_2048x2048.png?1341806573592172459" />
+
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  {{ "fonts.css"  | asset_url | stylesheet_tag }}
+  {{ 'glacier.min.css' | asset_url | stylesheet_tag }}
+
+
+</head>
+
+<body>
+  <!-- Begin header !-->
+  <header>
+    <div class="container">
+      <div id="utility">
+        <ul class="social-icons">
+          <li class="facebook">
+            <a href="https://www.facebook.com/pages/Holly-Corey/1667543570146366" target="_blank">
+              <i class="fa fa-lg fa-facebook">
+                <span></span>
+              </i>
+              <span>Facebook</span>
+            </a>
+          </li>
+
+          <!-- <li class="twitter">
+            <a href="#">
+              <i class="fa fa-lg fa-twitter">
+                <span></span>
+              </i>
+              <span>Twitter</span>
+            </a>
+          </li> -->
+
+          <li class="instagram">
+            <a href="https://instagram.com/livehollycorey/" target="_blank">
+              <i class="fa fa-lg fa-instagram">
+                <span></span>
+              </i>
+              <span>Instagram</span>
+            </a>
+          </li>
+
+          <!-- <li class="pinterest">
+            <a href="#">
+              <i class="fa fa-lg fa-pinterest">
+                <span></span>
+              </i>
+              <span>Pinterest</span>
+            </a>
+          </li> -->
+
+          <!-- <li class="rss">
+            <a href="#">
+              <i class="fa fa-lg fa-rss">
+                <span></span>
+              </i>
+              <span>RSS</span>
+            </a>
+          </li> -->
+        </ul>
+        <a class="hc-button" href="http://eepurl.com/bsIco5" target="_blank">Sign Up For Emails!</a>
+      </div>
+      <div class="gl-row">
+        <div class="gl-col gl-col_7" id="mainNav-left">
+          <ul class='mainNav cf'>
+            {% for link in linklists.main-menu-left.links %}
+              <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="gl-col gl-col_2" id="logo">
+          <a href="http://hollycorey.com">
+            <img src="{{ 'logo-white.png' | asset_url }}" />
+          </a>
+        </div>
+
+        <div class="gl-col gl-col_7" id="mainNav-right">
+          <ul class='mainNav cf'>
+            {% for link in linklists.main-menu-right.links %}
+              <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- End header !-->
+
+
+
+  <!-- Begin content !-->
+  <div id="content">
+    <div class="container">
+      <h1 id="title">Wholesale Shop</h1>
+
+      <div id="toolbar">
+        <div class="gl-row">
+          {% if settings.display_search %}
+          <div id="search-form">
+            <form class="search" action="/search">
+              <input type="image" src="{{ 'icon-search.png' | asset_url }}" alt="Go" id="go">
+              <input type="text" name="q" class="search_box" placeholder="Search" value="{{ search.terms }}"  />
+            </form>
+          </div>
+          {% endif %}
+          <div id="cart-target" class="toolbar-cart {% if cart.item_count != 0 %}has-items{% endif %}">
+            <a href="/cart" class="checkout" title="Shopping Cart">
+              Check Out
+            </a>
+            <a href="/cart" class="cart" title="Shopping Cart">
+              <span id="cart-count">{{ cart.item_count }}</span>
+              Cart
+            </a>
+          </div>
+          {% include 'customer_links' %}
+        </div>
+      </div>
+
+      <div id="bar"></div>
+
+      <div class='gl-row'>
+        <!-- begin category list !-->
+        <div class='gl-col gl-col_4 sidebar'>
+          <ul id='archive-sidebar'>
+            {% for collection in collections %}
+              {% if collection.handle != 'frontpage' %}
+                <li class="{% cycle 'green', 'yellow', 'pink', 'purple', 'grey' %}">
+                  <a href="{{ collection.url }}">{{ collection.title }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- End category list !-->
+
+        <!-- begin template render !-->
+        <div class='gl-col gl-col_12 gl-pos_relative content'>
+
+          {% if template == "list-collections" %}
+          <div class="gl-row products masonry">
+            {% for collection in collections %}
+            {% unless collection.all_products_count == 0 or collection.handle == "frontpage" %}
+            {% include 'collection-loop' %}
+            {% endunless %}
+            {% endfor %}
+          </div>
+          {% else %}
+            {{ content_for_layout }}
+          {% endif %}
+        </div>
+      </div>
+      <!-- end template render !-->
+
+    </div>
+  </div>
+  <!-- End content-->
+
+
+
+  <!-- Begin footer -->
+  <footer>
+    <div class="container">
+      <div id="footerNav">
+        <ul class="footernav">
+          {% for link in linklists.footer.links %}
+            <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div id="attribution">
+        <span>Copyright &copy; Holly Corey All rights reserved. Site by <a href="http://meshfresh.com">MESH</a></span>
+        <div id="vendor-login">
+          <a class="hc-button" href="http://holly-corey-wholesale.myshopify.com" target="_blank">Vendor Log In</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End footer -->
+
+  {{ 'jquery.flexslider-min.js' | asset_url | script_tag }}
+
+  {% if settings.enable_product_image_zoom %}
+    {{ 'jquery.zoom.js' | asset_url | script_tag }}
+  {% endif %}
+  {{ 'jquery.tweet.js' | asset_url | script_tag }}
+  {{ 'jquery.fancybox.js' | asset_url | script_tag }}
+
+  {{ 'scripts.js' | asset_url | script_tag }}
+
+  <script src="{{ 'hollycorey.js' | asset_url }}" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+  <div class="gl-col gl-col-px gl-col-px_4 product">
+    <a href="{{ product.url }}" class="clearfix">
+      <div class="product-table">
+          <div class="image" style="background-image:url( {{ product | img_url: 'large' }} );">
+            <div>
+            {% if product.price_min < product.compare_at_price_min %}
+              <span class="circle sale">Sale</span>
+            {% endif %}
+            <img src="{% if product.images.size >= 1%}{{ product.featured_image | product_img_url: 'large' }}{% else %}{{ 'No_Image_2.png' | asset_url }}{% endif %}" alt="{{ product.title | escape  }}" />
+          </div>
+        </div>
+        <div class="details">
+          <span class="title">{{ product.title }}</span>
+          <span class="price">
+          {% if product.available %}
+            {% if product.price_varies %}
+            <small><em>from</em></small>
+            {% endif %}
+            {{ product.price | money }}
+            {% if product.compare_at_price_max > product.price %}
+              <del>{{ product.compare_at_price | money }}</del>
+            {% endif %}
+          {% else %}
+            {{ product.price | money }} Sold Out
+          {% endif %}
+          </span>
+          <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        </div>
+      </div>
+    </a>
+  </div>
